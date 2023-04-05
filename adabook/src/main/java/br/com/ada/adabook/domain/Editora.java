@@ -18,6 +18,4 @@ public class Editora {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy = "editora")
-    private List<Livro> livros;
 }

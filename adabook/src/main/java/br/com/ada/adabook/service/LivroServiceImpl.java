@@ -19,7 +19,6 @@ public class LivroServiceImpl implements LivroService {
 
     private final LivroRepository repository;
     private final LivroMapper mapper;
-    private final AutorService autorService;
 
     @Override
     public List<LivroListDTO> list() {
@@ -36,7 +35,6 @@ public class LivroServiceImpl implements LivroService {
     @Override
     public LivroDescriptionDTO save(LivroSaveDTO livroDTO) {
         Livro livro = mapper.toLivro(livroDTO);
-        livro.getAutores().forEach(autor -> autorService.findById(autor.getId()));
         return mapper.toLivroDescriptionDTO(repository.save(livro));
     }
 
@@ -44,7 +42,6 @@ public class LivroServiceImpl implements LivroService {
     public LivroDescriptionDTO update(Long id, LivroSaveDTO livroDTO) {
         Livro livro = mapper.toLivro(livroDTO);
         if (repository.existsById(id)){
-            livro.getAutores().forEach(autor -> autorService.findById(autor.getId()));
             livro.setId(id);
             repository.save(livro);
             return mapper.toLivroDescriptionDTO(livro);

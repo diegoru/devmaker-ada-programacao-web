@@ -15,5 +15,4 @@ public class LivroDescriptionDTO {
     private Integer anoPublicacao;
     private Integer numeroPaginas;
     private String isbn;
-    private List<Autor> autores;
 }

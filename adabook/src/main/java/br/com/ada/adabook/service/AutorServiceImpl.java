@@ -1,7 +1,6 @@
 package br.com.ada.adabook.service;
 
 import br.com.ada.adabook.domain.Autor;
-import br.com.ada.adabook.domain.Livro;
 import br.com.ada.adabook.dto.AutorDescriptionDTO;
 import br.com.ada.adabook.dto.AutorListDTO;
 import br.com.ada.adabook.dto.AutorSaveDTO;
