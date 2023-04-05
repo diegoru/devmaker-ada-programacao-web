@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AutorRepository extends CrudRepository<Autor, Long> {
+
+    boolean existsAutorByNome(String nome);
+    Autor findByNome(String nome);
+
 }

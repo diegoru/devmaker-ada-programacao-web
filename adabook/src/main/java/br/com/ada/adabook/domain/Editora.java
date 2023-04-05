@@ -5,20 +5,19 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Autor {
+public class Editora {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @ManyToMany(mappedBy = "autores")
-    private Set<Livro> livros = new HashSet<>();
+    @OneToMany(mappedBy = "editora")
+    private List<Livro> livros;
 }

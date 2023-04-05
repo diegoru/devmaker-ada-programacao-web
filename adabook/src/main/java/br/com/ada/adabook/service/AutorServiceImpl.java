@@ -1,7 +1,12 @@
 package br.com.ada.adabook.service;
 
 import br.com.ada.adabook.domain.Autor;
+import br.com.ada.adabook.domain.Livro;
+import br.com.ada.adabook.dto.AutorDescriptionDTO;
+import br.com.ada.adabook.dto.AutorListDTO;
+import br.com.ada.adabook.dto.AutorSaveDTO;
 import br.com.ada.adabook.exceptions.AutorNotFoundException;
+import br.com.ada.adabook.mapper.AutorMapper;
 import br.com.ada.adabook.repository.AutorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,27 +18,34 @@ import java.util.List;
 public class AutorServiceImpl implements AutorService {
 
     private final AutorRepository repository;
+    private final AutorMapper mapper;
 
     @Override
-    public List<Autor> list() {
-        return (List<Autor>) repository.findAll();
+    public List<AutorListDTO> list() {
+        List<Autor> autores = (List<Autor>) repository.findAll();
+        return autores.stream().map(mapper::toAutorListDTO).toList();
     }
 
     @Override
-    public Autor findById(Long id) {
-        return repository.findById(id).orElseThrow(AutorNotFoundException::new);
+    public AutorDescriptionDTO findById(Long id) {
+        Autor autor = repository.findById(id).orElseThrow(AutorNotFoundException::new);
+        return mapper.toAutorDescriptionDTO(autor);
     }
 
     @Override
-    public Autor save(Autor autor) {
-        return repository.save(autor);
+    public AutorDescriptionDTO save(AutorSaveDTO autorDTO) {
+        Autor autor = mapper.toAutor(autorDTO);
+        repository.save(autor);
+        return mapper.toAutorDescriptionDTO(autor);
     }
 
     @Override
-    public Autor update(Long id, Autor autor) {
-        if (repository.existsById(id)){
+    public AutorDescriptionDTO update(Long id, AutorSaveDTO autorDTO) {
+        Autor autor = mapper.toAutor(autorDTO);
+        if (repository.existsById(id)) {
             autor.setId(id);
-            return repository.save(autor);
+            repository.save(autor);
+            return mapper.toAutorDescriptionDTO(autor);
         }
         throw new AutorNotFoundException();
     }

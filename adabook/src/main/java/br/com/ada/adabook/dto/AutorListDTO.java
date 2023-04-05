@@ -1,13 +1,13 @@
 package br.com.ada.adabook.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AutorSaveDTO {
+public class AutorListDTO {
 
-    @NotBlank
+    private Long id;
     private String nome;
+
 }
