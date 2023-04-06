@@ -1,6 +1,5 @@
 package br.com.ada.adabook.dto;
 
-import br.com.ada.adabook.domain.Autor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,4 +14,5 @@ public class LivroDescriptionDTO {
     private Integer anoPublicacao;
     private Integer numeroPaginas;
     private String isbn;
+    private List<AutorResponseLivroDTO> autores;
 }

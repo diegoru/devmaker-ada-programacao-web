@@ -3,6 +3,7 @@ package br.com.ada.adabook.mapper;
 import br.com.ada.adabook.domain.Autor;
 import br.com.ada.adabook.dto.AutorDescriptionDTO;
 import br.com.ada.adabook.dto.AutorListDTO;
+import br.com.ada.adabook.dto.AutorResponseLivroDTO;
 import br.com.ada.adabook.dto.AutorSaveDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -29,5 +30,9 @@ public class AutorMapper {
 
     public AutorDescriptionDTO toAutorDescriptionDTO(Autor autor) {
         return mapper.map(autor, AutorDescriptionDTO.class);
+    }
+
+    public AutorResponseLivroDTO toAutorResponseLivroDTO(Autor autor) {
+        return mapper.map(autor, AutorResponseLivroDTO.class);
     }
 }

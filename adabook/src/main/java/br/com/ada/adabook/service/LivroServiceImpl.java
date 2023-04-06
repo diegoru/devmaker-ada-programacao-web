@@ -1,11 +1,14 @@
 package br.com.ada.adabook.service;
 
+import br.com.ada.adabook.domain.Autor;
 import br.com.ada.adabook.domain.Livro;
 import br.com.ada.adabook.dto.LivroDescriptionDTO;
 import br.com.ada.adabook.dto.LivroListDTO;
 import br.com.ada.adabook.dto.LivroSaveDTO;
+import br.com.ada.adabook.exceptions.AutorNotFoundException;
 import br.com.ada.adabook.exceptions.LivroNotFoundException;
 import br.com.ada.adabook.mapper.LivroMapper;
+import br.com.ada.adabook.repository.AutorRepository;
 import br.com.ada.adabook.repository.LivroRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ public class LivroServiceImpl implements LivroService {
 
     private final LivroRepository repository;
     private final LivroMapper mapper;
+    private final AutorRepository autorRepository;
 
     @Override
     public List<LivroListDTO> list() {
@@ -35,13 +39,19 @@ public class LivroServiceImpl implements LivroService {
     @Override
     public LivroDescriptionDTO save(LivroSaveDTO livroDTO) {
         Livro livro = mapper.toLivro(livroDTO);
-        return mapper.toLivroDescriptionDTO(repository.save(livro));
+        livro.getAutores().forEach(autor -> autorRepository.findById(autor.getId()).orElseThrow(AutorNotFoundException::new));
+        Livro livroSalvo = repository.save(livro);
+        for (Autor autor : livroSalvo.getAutores()) {
+            Autor autorRecuperado = autorRepository.findById(autor.getId()).get();
+            autor.setNome(autorRecuperado.getNome());
+        }
+        return mapper.toLivroDescriptionDTO(livroSalvo);
     }
 
     @Override
     public LivroDescriptionDTO update(Long id, LivroSaveDTO livroDTO) {
         Livro livro = mapper.toLivro(livroDTO);
-        if (repository.existsById(id)){
+        if (repository.existsById(id)) {
             livro.setId(id);
             repository.save(livro);
             return mapper.toLivroDescriptionDTO(livro);
@@ -51,7 +61,7 @@ public class LivroServiceImpl implements LivroService {
 
     @Override
     public void delete(Long id) {
-        if (!repository.existsById(id)){
+        if (!repository.existsById(id)) {
             throw new LivroNotFoundException();
         }
         repository.deleteById(id);
