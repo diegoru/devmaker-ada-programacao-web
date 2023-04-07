@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ErrorDTO {
-    private String mensagem;
+    private String message;
 }

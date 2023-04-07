@@ -12,7 +12,7 @@
 	<artifactId>adabook</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>adabook</name>
-	<description>API de cadastro de livros</description>
+	<description>Projeto final Programação Web II</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/adabook?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    open-in-view: false
+
+    hibernate:
+      ddl-auto: create
+      properties:
+        hibernate:
+          format-sql: true
+

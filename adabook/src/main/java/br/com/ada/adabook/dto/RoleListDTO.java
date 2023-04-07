@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AutorListDTO {
-
-    private Long id;
-    private String nome;
-
+public class RoleListDTO {
+    public Long id;
+    public String authority;
 }

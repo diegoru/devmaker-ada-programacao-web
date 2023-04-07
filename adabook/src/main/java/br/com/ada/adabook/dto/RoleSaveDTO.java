@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AutorResponseLivroDTO {
-    private Long id;
-    private String nome;
+public class RoleSaveDTO {
+    private String authority;
 
 }
