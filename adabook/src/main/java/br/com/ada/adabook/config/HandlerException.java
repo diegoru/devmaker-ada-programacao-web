@@ -1,10 +1,7 @@
 package br.com.ada.adabook.config;
 
 import br.com.ada.adabook.dto.ErrorDTO;
-import br.com.ada.adabook.exceptions.AuthorNotFoundException;
-import br.com.ada.adabook.exceptions.CategoryNotFoundException;
-import br.com.ada.adabook.exceptions.PublisherNotFoundException;
-import br.com.ada.adabook.exceptions.UserNotFoundException;
+import br.com.ada.adabook.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,7 +29,7 @@ public class HandlerException {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({AuthorNotFoundException.class, CategoryNotFoundException.class,
-            PublisherNotFoundException.class, UserNotFoundException.class})
+            PublisherNotFoundException.class, BookNotFoundException.class, UserNotFoundException.class})
     public ErrorDTO handleNotFoundException(Exception ex) {
         return ErrorDTO.builder().message(ex.getMessage()).build();
     }
