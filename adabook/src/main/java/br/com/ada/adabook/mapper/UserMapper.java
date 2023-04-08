@@ -1,8 +1,7 @@
 package br.com.ada.adabook.mapper;
 
 import br.com.ada.adabook.domain.User;
-import br.com.ada.adabook.dto.UserDescriptionDTO;
-import br.com.ada.adabook.dto.UserListDTO;
+import br.com.ada.adabook.dto.UserDTO;
 import br.com.ada.adabook.dto.UserSaveDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,10 +21,7 @@ public class UserMapper {
         return modelMapper.map(user, UserSaveDTO.class);
     }
 
-    public UserDescriptionDTO toUserDescriptionDTO(User user) {
-        return modelMapper.map(user, UserDescriptionDTO.class);
-    }
-    public UserListDTO toUserListDTO(User user) {
-        return modelMapper.map(user, UserListDTO.class);
+    public UserDTO toUserDTO(User user) {
+        return modelMapper.map(user, UserDTO.class);
     }
 }

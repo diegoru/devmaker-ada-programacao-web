@@ -1,16 +1,13 @@
 package br.com.ada.adabook.service;
 
-import br.com.ada.adabook.domain.Role;
 import br.com.ada.adabook.domain.User;
-import br.com.ada.adabook.dto.UserDescriptionDTO;
-import br.com.ada.adabook.dto.UserListDTO;
+import br.com.ada.adabook.dto.UserDTO;
 import br.com.ada.adabook.dto.UserSaveDTO;
-import br.com.ada.adabook.exceptions.RoleNotFoundException;
 import br.com.ada.adabook.exceptions.UserNotFoundException;
 import br.com.ada.adabook.mapper.UserMapper;
-import br.com.ada.adabook.repository.RoleRepository;
 import br.com.ada.adabook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,54 +18,44 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-    private final RoleRepository roleRepository;
+//    private final PasswordEncoder passwordEncoder;
+
 
     @Override
-    public List<UserListDTO> list() {
-        List<User> listUsers = (List<User>) userRepository.findAll();
-        return listUsers.stream().map(userMapper::toUserListDTO).toList();
+    public List<UserDTO> list() {
+        List<User> users = (List<User>) userRepository.findAll();
+        return users.stream().map(userMapper::toUserDTO).toList();
     }
 
     @Override
-    public UserDescriptionDTO findById(Long id) {
+    public UserDTO findById(Long id) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        return userMapper.toUserDescriptionDTO(user);
+        return userMapper.toUserDTO(user);
     }
 
     @Override
-    public UserDescriptionDTO save(UserSaveDTO userDTO) {
-        existRole(userDTO);
+    public UserDTO save(UserSaveDTO userDTO) {
+//        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User user = userMapper.toUser(userDTO);
-        User userSave = userRepository.save(user);
-        for (Role role: userSave.getRoles()){
-            Role roleRecovered = roleRepository.findById(role.getId()).get();
-            role.setAuthority(roleRecovered.getAuthority());
-        }
-        return userMapper.toUserDescriptionDTO(userSave);
+        return userMapper.toUserDTO(userRepository.save(user));
     }
 
     @Override
-    public UserDescriptionDTO update(Long id, UserSaveDTO userDTO) {
-        existRole(userDTO);
-        User user = userMapper.toUser(userDTO);
+    public UserDTO update(Long id, UserSaveDTO userDTO) {
         if (userRepository.existsById(id)) {
+            User user = userMapper.toUser(userDTO);
             user.setId(id);
-            return userMapper.toUserDescriptionDTO(userRepository.save(user));
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userMapper.toUserDTO(userRepository.save(user));
         }
         throw new UserNotFoundException();
     }
 
     @Override
     public void delete(Long id) {
-        if (!userRepository.existsById(id)){
+        if (!userRepository.existsById(id)) {
             throw new UserNotFoundException();
         }
         userRepository.deleteById(id);
-    }
-
-    private void existRole(UserSaveDTO userDTO) {
-        userDTO.getRoles()
-                .forEach(role -> roleRepository.findById(role.getId())
-                        .orElseThrow(RoleNotFoundException::new));
     }
 }

@@ -1,11 +1,12 @@
-insert into role (authority) VALUES ('ROLE_OPERATOR');
-insert into role (authority) VALUES ('ROLE_ADMIN');
-
-insert into user (first_name, last_name, email, password) VALUES ('Diego', 'Ruescas', 'diego@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-insert into user (first_name, last_name, email, password) VALUES ('Charlene', 'Morais', 'charlene@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+insert into author (name, created_at, updated_at) values ('Robert C. Martin', utc_timestamp, utc_timestamp);
+insert into author (name, created_at, updated_at) values ('Martin Fowler', utc_timestamp, utc_timestamp);
+insert into author (name, created_at, updated_at) values ('Eric Evans', utc_timestamp, utc_timestamp);
 
 
+insert into category (name, created_at, updated_at) values ('Computação, Tecnologia e Mídias', utc_timestamp, utc_timestamp);
+insert into category (name, created_at, updated_at) values ('Direito', utc_timestamp, utc_timestamp);
+insert into category (name, created_at, updated_at) values ('Biografias e Histórias Reais', utc_timestamp, utc_timestamp);
 
-insert into user_role (user_id, role_id) VALUES (1, 1);
-insert into user_role (user_id, role_id) VALUES (2, 1);
-insert into user_role (user_id, role_id) VALUES (2, 2);
+insert into publisher (name, created_at, updated_at) values ('Alta Books', utc_timestamp, utc_timestamp);
+insert into publisher (name, created_at, updated_at) values ('Novatec Editora', utc_timestamp, utc_timestamp);
+insert into publisher (name, created_at, updated_at) values ('Pearson Universidades', utc_timestamp, utc_timestamp);

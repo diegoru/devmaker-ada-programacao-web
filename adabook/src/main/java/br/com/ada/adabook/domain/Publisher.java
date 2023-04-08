@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Author {
+public class Publisher {
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +26,5 @@ public class Author {
     @UpdateTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime updatedAt;
+
 }

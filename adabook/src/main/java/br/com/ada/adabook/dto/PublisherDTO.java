@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RoleListDTO {
+public class PublisherDTO {
     public Long id;
-    public String authority;
+    public String name;
 }
