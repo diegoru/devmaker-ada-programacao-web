@@ -1,15 +1,16 @@
 package br.com.ada.adabook.service;
 
-import br.com.ada.adabook.dto.PublisherDTO;
-import br.com.ada.adabook.dto.PublisherSaveDTO;
+import br.com.ada.adabook.dto.publisher.PublisherDescriptionDTO;
+import br.com.ada.adabook.dto.publisher.PublisherListDTO;
+import br.com.ada.adabook.dto.publisher.PublisherSaveDTO;
 
 import java.util.List;
 
 public interface PublisherService {
-    List<PublisherDTO> list();
-    PublisherDTO findById(Long id);
-    PublisherDTO save(PublisherSaveDTO publisherSaveDTO);
-    PublisherDTO update(Long id, PublisherSaveDTO publisherSaveDTO);
+    List<PublisherListDTO> list();
+    PublisherDescriptionDTO findById(Long id);
+    PublisherListDTO save(PublisherSaveDTO publisherSaveDTO);
+    PublisherListDTO update(Long id, PublisherSaveDTO publisherSaveDTO);
     void delete(Long id);
 
 }

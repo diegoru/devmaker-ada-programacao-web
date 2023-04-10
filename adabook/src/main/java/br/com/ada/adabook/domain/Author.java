@@ -21,13 +21,17 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
+    private Set<Book> books = new HashSet<>();
+
     @CreationTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime createdAt;
+
     @UpdateTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime updatedAt;
 
-    @ManyToMany(mappedBy = "authors")
-    private Set<Book> books = new HashSet<>();
+
 }

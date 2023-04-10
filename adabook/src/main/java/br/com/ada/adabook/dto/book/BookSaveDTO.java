@@ -1,6 +1,7 @@
-package br.com.ada.adabook.dto;
+package br.com.ada.adabook.dto.book;
 
 import br.com.ada.adabook.domain.Author;
+import br.com.ada.adabook.domain.Category;
 import br.com.ada.adabook.domain.Publisher;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -23,5 +24,8 @@ public class BookSaveDTO {
     @NotEmpty(message = "Author is a required field")
     @NotNull
     private List<Author> authors;
+    @NotNull(message = "Publisher is a required field")
     private Publisher publisher;
+    @NotNull(message = "Category is a required field")
+    private Category category;
 }

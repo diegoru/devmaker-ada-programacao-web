@@ -1,8 +1,9 @@
 package br.com.ada.adabook.mapper;
 
 import br.com.ada.adabook.domain.Author;
-import br.com.ada.adabook.dto.AuthorDTO;
-import br.com.ada.adabook.dto.AuthorSaveDTO;
+import br.com.ada.adabook.dto.author.AuthorDescriptionDTO;
+import br.com.ada.adabook.dto.author.AuthorListDTO;
+import br.com.ada.adabook.dto.author.AuthorSaveDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -17,8 +18,12 @@ public class AuthorMapper {
         return modelMapper.map(authorSaveDTO, Author.class);
     }
 
-    public AuthorDTO toAuthorDTO(Author author) {
-        return modelMapper.map(author, AuthorDTO.class);
+    public AuthorListDTO toAuthorDTO(Author author) {
+        return modelMapper.map(author, AuthorListDTO.class);
+    }
+
+    public AuthorDescriptionDTO toAuthorDescriptionDTO(Author author) {
+        return modelMapper.map(author, AuthorDescriptionDTO.class);
     }
 
 }

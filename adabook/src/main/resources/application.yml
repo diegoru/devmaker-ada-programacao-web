@@ -16,3 +16,7 @@ spring:
 jwt:
   secret: secret
 
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:adabook123456}

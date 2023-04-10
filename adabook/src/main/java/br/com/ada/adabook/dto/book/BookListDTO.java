@@ -1,4 +1,4 @@
-package br.com.ada.adabook.dto;
+package br.com.ada.adabook.dto.book;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,14 +1,19 @@
 package br.com.ada.adabook.service;
 
+import br.com.ada.adabook.domain.Address;
 import br.com.ada.adabook.domain.User;
-import br.com.ada.adabook.dto.UserDTO;
-import br.com.ada.adabook.dto.UserSaveDTO;
+import br.com.ada.adabook.dto.AddressDTO;
+import br.com.ada.adabook.dto.user.UserDescriptionDTO;
+import br.com.ada.adabook.dto.user.UserListDTO;
+import br.com.ada.adabook.dto.user.UserSaveDTO;
 import br.com.ada.adabook.exceptions.UserNotFoundException;
+import br.com.ada.adabook.mapper.AddressMapper;
 import br.com.ada.adabook.mapper.UserMapper;
 import br.com.ada.adabook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -18,44 +23,44 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-//    private final PasswordEncoder passwordEncoder;
-
+    private final AddressMapper addressMapper;
+    private final RestTemplate restTemplate;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<UserDTO> list() {
-        List<User> users = (List<User>) userRepository.findAll();
-        return users.stream().map(userMapper::toUserDTO).toList();
+    public List<UserListDTO> list() {
+        List<User> listUsers = (List<User>) userRepository.findAll();
+        return listUsers.stream().map(userMapper::toUserListDTO).toList();
     }
 
     @Override
-    public UserDTO findById(Long id) {
+    public UserDescriptionDTO findbyId(Long id) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        return userMapper.toUserDTO(user);
+        return userMapper.toUserDescriptionDTO(user);
     }
 
     @Override
-    public UserDTO save(UserSaveDTO userDTO) {
-//        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+    public UserDescriptionDTO save(UserSaveDTO userDTO) {
+
+        String url = "https://cdn.apicep.com/file/apicep/" + userDTO.getCode() + ".json";
+        AddressDTO response = restTemplate.getForObject(url, AddressDTO.class);
+        Address address = addressMapper.toAddress(response);
         User user = userMapper.toUser(userDTO);
-        return userMapper.toUserDTO(userRepository.save(user));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setAddress(address);
+        user.getAddress().setNumber(userDTO.getNumber());
+        user.getAddress().setComplement(userDTO.getComplement());
+        userRepository.save(user);
+        return userMapper.toUserDescriptionDTO(user);
     }
 
     @Override
-    public UserDTO update(Long id, UserSaveDTO userDTO) {
-        if (userRepository.existsById(id)) {
-            User user = userMapper.toUser(userDTO);
-            user.setId(id);
-//            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return userMapper.toUserDTO(userRepository.save(user));
-        }
-        throw new UserNotFoundException();
+    public UserDescriptionDTO update(Long id, UserSaveDTO userDTO) {
+        return null;
     }
 
     @Override
     public void delete(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException();
-        }
-        userRepository.deleteById(id);
+
     }
 }

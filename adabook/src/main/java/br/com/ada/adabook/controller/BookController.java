@@ -1,12 +1,13 @@
 package br.com.ada.adabook.controller;
 
-import br.com.ada.adabook.dto.BookDescriptionDTO;
-import br.com.ada.adabook.dto.BookListDTO;
-import br.com.ada.adabook.dto.BookSaveDTO;
+import br.com.ada.adabook.dto.book.BookDescriptionDTO;
+import br.com.ada.adabook.dto.book.BookListDTO;
+import br.com.ada.adabook.dto.book.BookSaveDTO;
 import br.com.ada.adabook.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured({"ADMIN", "MANAGER"})
     public BookDescriptionDTO save(@Valid @RequestBody BookSaveDTO bookSaveDTO) {
         return bookService.save(bookSaveDTO);
     }
@@ -41,6 +43,7 @@ public class BookController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Secured("ADMIN")
     public void delete(@PathVariable Long id) {
         bookService.delete(id);
     }

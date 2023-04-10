@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,9 +21,14 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    private Set<Book> books;
+
     @CreationTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime createdAt;
+
     @UpdateTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime updatedAt;

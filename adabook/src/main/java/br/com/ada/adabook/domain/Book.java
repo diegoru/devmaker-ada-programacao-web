@@ -38,6 +38,10 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @CreationTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime createdAt;

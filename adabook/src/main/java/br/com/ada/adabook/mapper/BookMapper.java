@@ -1,9 +1,9 @@
 package br.com.ada.adabook.mapper;
 
 import br.com.ada.adabook.domain.Book;
-import br.com.ada.adabook.dto.BookDescriptionDTO;
-import br.com.ada.adabook.dto.BookListDTO;
-import br.com.ada.adabook.dto.BookSaveDTO;
+import br.com.ada.adabook.dto.book.BookDescriptionDTO;
+import br.com.ada.adabook.dto.book.BookListDTO;
+import br.com.ada.adabook.dto.book.BookSaveDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

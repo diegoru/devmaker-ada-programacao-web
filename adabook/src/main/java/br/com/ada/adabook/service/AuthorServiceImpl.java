@@ -1,8 +1,9 @@
 package br.com.ada.adabook.service;
 
 import br.com.ada.adabook.domain.Author;
-import br.com.ada.adabook.dto.AuthorDTO;
-import br.com.ada.adabook.dto.AuthorSaveDTO;
+import br.com.ada.adabook.dto.author.AuthorDescriptionDTO;
+import br.com.ada.adabook.dto.author.AuthorListDTO;
+import br.com.ada.adabook.dto.author.AuthorSaveDTO;
 import br.com.ada.adabook.exceptions.AuthorNotFoundException;
 import br.com.ada.adabook.mapper.AuthorMapper;
 import br.com.ada.adabook.repository.AuthorRepository;
@@ -19,26 +20,26 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorMapper authorMapper;
 
     @Override
-    public List<AuthorDTO> list() {
+    public List<AuthorListDTO> list() {
         List<Author> authors = (List<Author>) authorRepository.findAll();
         return authors.stream().map(authorMapper::toAuthorDTO).toList();
     }
 
     @Override
-    public AuthorDTO findById(Long id) {
+    public AuthorDescriptionDTO findById(Long id) {
         Author author = authorRepository.findById(id).orElseThrow(AuthorNotFoundException::new);
-        return authorMapper.toAuthorDTO(author);
+        return authorMapper.toAuthorDescriptionDTO(author);
     }
 
     @Override
-    public AuthorDTO save(AuthorSaveDTO authorSaveDTO) {
+    public AuthorListDTO save(AuthorSaveDTO authorSaveDTO) {
         Author author = authorMapper.toAuthor(authorSaveDTO);
         authorRepository.save(author);
         return authorMapper.toAuthorDTO(author);
     }
 
     @Override
-    public AuthorDTO update(Long id, AuthorSaveDTO authorSaveDTO) {
+    public AuthorListDTO update(Long id, AuthorSaveDTO authorSaveDTO) {
         if (authorRepository.existsById(id)) {
             Author author = authorMapper.toAuthor(authorSaveDTO);
             author.setId(id);
@@ -52,6 +53,6 @@ public class AuthorServiceImpl implements AuthorService {
         if (!authorRepository.existsById(id)) {
             throw new AuthorNotFoundException();
         }
-        authorRepository.deleteById(id);
+            authorRepository.deleteById(id);
     }
 }

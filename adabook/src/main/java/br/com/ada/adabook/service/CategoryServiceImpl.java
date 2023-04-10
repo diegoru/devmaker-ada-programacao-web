@@ -1,8 +1,9 @@
 package br.com.ada.adabook.service;
 
 import br.com.ada.adabook.domain.Category;
-import br.com.ada.adabook.dto.CategoryDTO;
-import br.com.ada.adabook.dto.CategorySaveDTO;
+import br.com.ada.adabook.dto.category.CategoryListDTO;
+import br.com.ada.adabook.dto.category.CategoryDescriptionDTO;
+import br.com.ada.adabook.dto.category.CategorySaveDTO;
 import br.com.ada.adabook.exceptions.CategoryNotFoundException;
 import br.com.ada.adabook.mapper.CategoryMapper;
 import br.com.ada.adabook.repository.CategoryRepository;
@@ -19,26 +20,26 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public List<CategoryDTO> list() {
+    public List<CategoryListDTO> list() {
         List<Category> categorys = (List<Category>) categoryRepository.findAll();
         return categorys.stream().map(categoryMapper::toCategoryDTO).toList();
     }
 
     @Override
-    public CategoryDTO findById(Long id) {
+    public CategoryDescriptionDTO findById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
-        return categoryMapper.toCategoryDTO(category);
+        return categoryMapper.toCategoryDescriptionDTO(category);
     }
 
     @Override
-    public CategoryDTO save(CategorySaveDTO categorySaveDTO) {
+    public CategoryListDTO save(CategorySaveDTO categorySaveDTO) {
         Category category = categoryMapper.toCategory(categorySaveDTO);
         categoryRepository.save(category);
         return categoryMapper.toCategoryDTO(category);
     }
 
     @Override
-    public CategoryDTO update(Long id, CategorySaveDTO categorySaveDTO) {
+    public CategoryListDTO update(Long id, CategorySaveDTO categorySaveDTO) {
         if (categoryRepository.existsById(id)) {
             Category category = categoryMapper.toCategory(categorySaveDTO);
             category.setId(id);
