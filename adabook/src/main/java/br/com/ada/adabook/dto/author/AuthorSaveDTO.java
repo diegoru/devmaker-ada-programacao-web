@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 public class AuthorSaveDTO {
     @NotBlank(message = "Name is a required field")
-    public String name;
+    private String name;
 }

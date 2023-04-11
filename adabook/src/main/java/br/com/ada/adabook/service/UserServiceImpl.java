@@ -3,7 +3,7 @@ package br.com.ada.adabook.service;
 import br.com.ada.adabook.domain.Address;
 import br.com.ada.adabook.domain.User;
 import br.com.ada.adabook.dto.AddressDTO;
-import br.com.ada.adabook.dto.user.UserDescriptionDTO;
+import br.com.ada.adabook.dto.user.UserDetailsDTO;
 import br.com.ada.adabook.dto.user.UserListDTO;
 import br.com.ada.adabook.dto.user.UserSaveDTO;
 import br.com.ada.adabook.exceptions.UserNotFoundException;
@@ -34,13 +34,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDescriptionDTO findbyId(Long id) {
+    public UserDetailsDTO findbyId(Long id) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return userMapper.toUserDescriptionDTO(user);
     }
 
     @Override
-    public UserDescriptionDTO save(UserSaveDTO userDTO) {
+    public UserDetailsDTO save(UserSaveDTO userDTO) {
 
         String url = "https://cdn.apicep.com/file/apicep/" + userDTO.getCode() + ".json";
         AddressDTO response = restTemplate.getForObject(url, AddressDTO.class);
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDescriptionDTO update(Long id, UserSaveDTO userDTO) {
+    public UserDetailsDTO update(Long id, UserSaveDTO userDTO) {
         return null;
     }
 

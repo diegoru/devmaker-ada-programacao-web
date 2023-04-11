@@ -21,13 +21,13 @@ insert into book_author (book_id, author_id) values (3, 2);
 
 insert into address (address, number, complement, district, city, state, code) values ('Paulista', '1234', 'sala 154', 'Bela Vista', 'São Paulo', 'SP', '01310-100');
 
-insert into role (authority) values ('ADMIN');
-insert into role (authority) values ('MANAGER');
-insert into role (authority) values ('COMMOM_USER');
+insert into role (authority, created_at, updated_at) values ('ADMIN', utc_timestamp, utc_timestamp);
+insert into role (authority, created_at, updated_at) values ('MANAGER', utc_timestamp, utc_timestamp);
+insert into role (authority, created_at, updated_at) values ('COMMOM_USER', utc_timestamp, utc_timestamp);
 
-insert into user (first_name, last_name, login, password, address_id) values('Diego', 'Ruescas', 'diego@email.com', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.', 1);
-insert into user (first_name, last_name, login, password, address_id) values('Lucio', 'Alves', 'lucio@email.com', '$2a$12$2.OCgo0USS5YAVVP.UraxO1ZFAw.DQV7t77yETCHXPAEnrgZEEivi', 1);
-insert into user (first_name, last_name, login, password, address_id) values('João', 'Santos', 'joao@email.com', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.', 1);
+insert into user (first_name, last_name, login, password, address_id, created_at, updated_at) values('Diego', 'Ruescas', 'diego@email.com', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.', 1, utc_timestamp, utc_timestamp);
+insert into user (first_name, last_name, login, password, address_id, created_at, updated_at) values('Lucio', 'Alves', 'lucio@email.com', '$2a$12$2.OCgo0USS5YAVVP.UraxO1ZFAw.DQV7t77yETCHXPAEnrgZEEivi', 1, utc_timestamp, utc_timestamp);
+insert into user (first_name, last_name, login, password, address_id, created_at, updated_at) values('João', 'Santos', 'joao@email.com', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.', 1, utc_timestamp, utc_timestamp);
 
 insert into user_role (user_id, role_id) values (1, 1);
 insert into user_role (user_id, role_id) values (2, 3);

@@ -1,6 +1,6 @@
 package br.com.ada.adabook.controller;
 
-import br.com.ada.adabook.dto.publisher.PublisherDescriptionDTO;
+import br.com.ada.adabook.dto.publisher.PublisherDetailsDTO;
 import br.com.ada.adabook.dto.publisher.PublisherListDTO;
 import br.com.ada.adabook.dto.publisher.PublisherSaveDTO;
 import br.com.ada.adabook.service.PublisherService;
@@ -25,7 +25,7 @@ public class PublisherController {
     }
 
     @GetMapping("{id}")
-    public PublisherDescriptionDTO findById(@PathVariable Long id){
+    public PublisherDetailsDTO findById(@PathVariable Long id){
         return publisherService.findById(id);
     }
 

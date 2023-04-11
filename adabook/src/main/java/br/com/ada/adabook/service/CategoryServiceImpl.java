@@ -2,7 +2,7 @@ package br.com.ada.adabook.service;
 
 import br.com.ada.adabook.domain.Category;
 import br.com.ada.adabook.dto.category.CategoryListDTO;
-import br.com.ada.adabook.dto.category.CategoryDescriptionDTO;
+import br.com.ada.adabook.dto.category.CategoryDetailsDTO;
 import br.com.ada.adabook.dto.category.CategorySaveDTO;
 import br.com.ada.adabook.exceptions.CategoryNotFoundException;
 import br.com.ada.adabook.mapper.CategoryMapper;
@@ -26,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDescriptionDTO findById(Long id) {
+    public CategoryDetailsDTO findById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
         return categoryMapper.toCategoryDescriptionDTO(category);
     }

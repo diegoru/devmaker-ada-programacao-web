@@ -1,7 +1,7 @@
 package br.com.ada.adabook.controller;
 
 import br.com.ada.adabook.dto.category.CategoryListDTO;
-import br.com.ada.adabook.dto.category.CategoryDescriptionDTO;
+import br.com.ada.adabook.dto.category.CategoryDetailsDTO;
 import br.com.ada.adabook.dto.category.CategorySaveDTO;
 import br.com.ada.adabook.service.CategoryService;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping("{id}")
-    public CategoryDescriptionDTO findById(@PathVariable Long id){
+    public CategoryDetailsDTO findById(@PathVariable Long id){
         return categoryService.findById(id);
     }
 

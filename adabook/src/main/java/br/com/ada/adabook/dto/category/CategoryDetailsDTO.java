@@ -1,4 +1,4 @@
-package br.com.ada.adabook.dto.publisher;
+package br.com.ada.adabook.dto.category;
 
 import br.com.ada.adabook.dto.book.BookListDTO;
 import lombok.Getter;
@@ -8,8 +8,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PublisherDescriptionDTO {
+public class CategoryDetailsDTO {
     private Long id;
     private String name;
     private List<BookListDTO> books;
+
 }

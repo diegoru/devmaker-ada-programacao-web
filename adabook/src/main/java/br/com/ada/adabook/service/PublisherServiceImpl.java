@@ -1,7 +1,7 @@
 package br.com.ada.adabook.service;
 
 import br.com.ada.adabook.domain.Publisher;
-import br.com.ada.adabook.dto.publisher.PublisherDescriptionDTO;
+import br.com.ada.adabook.dto.publisher.PublisherDetailsDTO;
 import br.com.ada.adabook.dto.publisher.PublisherListDTO;
 import br.com.ada.adabook.dto.publisher.PublisherSaveDTO;
 import br.com.ada.adabook.exceptions.PublisherNotFoundException;
@@ -26,7 +26,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public PublisherDescriptionDTO findById(Long id) {
+    public PublisherDetailsDTO findById(Long id) {
         Publisher publisher = publisherRepository.findById(id).orElseThrow(PublisherNotFoundException::new);
         return publisherMapper.toPublisherDescriptionDTO(publisher);
     }

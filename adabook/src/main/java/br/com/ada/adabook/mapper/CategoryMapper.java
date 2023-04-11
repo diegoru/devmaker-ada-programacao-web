@@ -2,7 +2,7 @@ package br.com.ada.adabook.mapper;
 
 import br.com.ada.adabook.domain.Category;
 import br.com.ada.adabook.dto.category.CategoryListDTO;
-import br.com.ada.adabook.dto.category.CategoryDescriptionDTO;
+import br.com.ada.adabook.dto.category.CategoryDetailsDTO;
 import br.com.ada.adabook.dto.category.CategorySaveDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,8 +22,8 @@ public class CategoryMapper {
         return modelMapper.map(category, CategoryListDTO.class);
     }
 
-    public CategoryDescriptionDTO toCategoryDescriptionDTO(Category category) {
-        return modelMapper.map(category, CategoryDescriptionDTO.class);
+    public CategoryDetailsDTO toCategoryDescriptionDTO(Category category) {
+        return modelMapper.map(category, CategoryDetailsDTO.class);
     }
 
 }

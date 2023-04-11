@@ -4,7 +4,7 @@ import br.com.ada.adabook.domain.Author;
 import br.com.ada.adabook.domain.Book;
 import br.com.ada.adabook.domain.Category;
 import br.com.ada.adabook.domain.Publisher;
-import br.com.ada.adabook.dto.book.BookDescriptionDTO;
+import br.com.ada.adabook.dto.book.BookDetailsDTO;
 import br.com.ada.adabook.dto.book.BookListDTO;
 import br.com.ada.adabook.dto.book.BookSaveDTO;
 import br.com.ada.adabook.exceptions.AuthorNotFoundException;
@@ -38,13 +38,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDescriptionDTO findById(Long id) {
+    public BookDetailsDTO findById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
         return bookMapper.toBookDescriptionDTO(book);
     }
 
     @Override
-    public BookDescriptionDTO save(BookSaveDTO bookSaveDTO) {
+    public BookDetailsDTO save(BookSaveDTO bookSaveDTO) {
         Book book = bookMapper.toBook(bookSaveDTO);
         book.getAuthors().forEach(author -> authorRepository.findById(author.getId()).orElseThrow(AuthorNotFoundException::new));
         getRelatedAttributes(book);
@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDescriptionDTO update(Long id, BookSaveDTO bookSaveDTO) {
+    public BookDetailsDTO update(Long id, BookSaveDTO bookSaveDTO) {
         if (bookRepository.existsById(id)) {
             Book book = bookMapper.toBook(bookSaveDTO);
             book.setId(id);

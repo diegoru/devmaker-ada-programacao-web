@@ -1,6 +1,5 @@
 package br.com.ada.adabook.dto.book;
 
-import br.com.ada.adabook.domain.Category;
 import br.com.ada.adabook.dto.author.AuthorListDTO;
 import br.com.ada.adabook.dto.category.CategoryListDTO;
 import br.com.ada.adabook.dto.publisher.PublisherListDTO;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class BookDescriptionDTO {
+public class BookDetailsDTO {
     private Long id;
     private String title;
     private String description;

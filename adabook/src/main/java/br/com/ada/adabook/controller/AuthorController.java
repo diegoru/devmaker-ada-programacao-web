@@ -1,6 +1,6 @@
 package br.com.ada.adabook.controller;
 
-import br.com.ada.adabook.dto.author.AuthorDescriptionDTO;
+import br.com.ada.adabook.dto.author.AuthorDetailsDTO;
 import br.com.ada.adabook.dto.author.AuthorListDTO;
 import br.com.ada.adabook.dto.author.AuthorSaveDTO;
 import br.com.ada.adabook.service.AuthorService;
@@ -25,7 +25,7 @@ public class AuthorController {
     }
 
     @GetMapping("{id}")
-    public AuthorDescriptionDTO findById(@PathVariable Long id){
+    public AuthorDetailsDTO findById(@PathVariable Long id){
         return authorService.findById(id);
     }
 

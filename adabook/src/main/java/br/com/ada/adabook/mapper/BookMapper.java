@@ -1,7 +1,7 @@
 package br.com.ada.adabook.mapper;
 
 import br.com.ada.adabook.domain.Book;
-import br.com.ada.adabook.dto.book.BookDescriptionDTO;
+import br.com.ada.adabook.dto.book.BookDetailsDTO;
 import br.com.ada.adabook.dto.book.BookListDTO;
 import br.com.ada.adabook.dto.book.BookSaveDTO;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ public class BookMapper {
         return modelMapper.map(bookSaveDTO, Book.class);
     }
 
-    public BookDescriptionDTO toBookDescriptionDTO(Book book) {
-        return modelMapper.map(book, BookDescriptionDTO.class);
+    public BookDetailsDTO toBookDescriptionDTO(Book book) {
+        return modelMapper.map(book, BookDetailsDTO.class);
     }
 
     public BookListDTO toBookListDTO(Book book) {

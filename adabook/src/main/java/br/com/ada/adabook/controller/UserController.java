@@ -1,6 +1,6 @@
 package br.com.ada.adabook.controller;
 
-import br.com.ada.adabook.dto.user.UserDescriptionDTO;
+import br.com.ada.adabook.dto.user.UserDetailsDTO;
 import br.com.ada.adabook.dto.user.UserListDTO;
 import br.com.ada.adabook.dto.user.UserSaveDTO;
 import br.com.ada.adabook.service.UserService;
@@ -27,13 +27,13 @@ public class UserController {
 
     @GetMapping("{id}")
     @Secured({"ADMIN", "MANAGER"})
-    public UserDescriptionDTO findById(@PathVariable Long id) {
+    public UserDetailsDTO findById(@PathVariable Long id) {
         return userService.findbyId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDescriptionDTO save(@RequestBody @Valid UserSaveDTO userDTO) {
+    public UserDetailsDTO save(@RequestBody @Valid UserSaveDTO userDTO) {
         return userService.save(userDTO);
     }
 
